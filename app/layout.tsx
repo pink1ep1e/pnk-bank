@@ -85,7 +85,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo-pnk-bank-rounded.png" /> 
       </head>
-      <body className={gtEsti.className}>
+      <body className={gtEsti.className} style={{ marginRight: "0px !important" }}>
         <main className="min-h-screen">
           <Providers>{children}</Providers>
         </main>
