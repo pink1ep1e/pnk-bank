@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
-import { savePayment } from '@/lib/payment-system'; // Предположим, что у нас есть функция для сохранения платежа в базе данных
+import { savePayment } from '@/lib/payment-system';
 import { PAYMENT_STATUS } from '@prisma/client';
 
 export async function POST(request: Request) {
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     }
 
     // Создание URL для редиректа
-    const paymentUrl = `http://192.162.66.200:3000/pay?paymentId=${paymentId}&amount=${amount}&recipient=${recipient}&description=${description}&shopUrl=${shopUrl}`;
+    const paymentUrl = `https://pnk-bank.vercel.app//pay?paymentId=${paymentId}&amount=${amount}&recipient=${recipient}&description=${description}&shopUrl=${shopUrl}`;
 
     return NextResponse.json({ paymentUrl, paymentId });
 } 

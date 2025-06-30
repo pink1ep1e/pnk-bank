@@ -190,7 +190,7 @@ export const LastOperation: React.FC<Props> = ({
                         </div>
                     </div>
                 </DialogTrigger>
-                <DialogContent className="min-w-[400px] p-4 px-10 border bg-white shadow-md">
+                <DialogContent className="w-[400px] p-4 px-10 border bg-white shadow-md">
                     <DialogHeader>
                         <div className="flex gap-6">
                             <h1 className="text-[18px] font-semibold">ID операции: {id}</h1>
