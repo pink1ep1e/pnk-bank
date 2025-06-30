@@ -27,9 +27,9 @@ export default function LandingPage() {
       const randomIndex = Math.floor(Math.random() * hints.length);
       setHint(hints[randomIndex]);
     }, 2000); // Меняем подсказку каждые 5 секунд
-
+  
     return () => clearInterval(interval);
-  }, []);
+  }, [hints]);
 
   const download = () => {
     toast({

@@ -28,7 +28,7 @@ export default function LandingPage() {
     }, 2000); // Меняем подсказку каждые 5 секунд
 
     return () => clearInterval(interval);
-  }, []);
+  }, [hints]);
 
   const download = () => {
     toast({

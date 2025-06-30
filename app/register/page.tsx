@@ -49,7 +49,7 @@ export default function RegisterPage() {
     }, 10000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [content.length]);
 
   return (
     <div >
