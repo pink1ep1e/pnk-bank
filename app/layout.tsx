@@ -26,7 +26,7 @@ const gtEsti = localFont({
 
 export const metadata: Metadata = {
   title: "pnk банк - Онлайн-банк, переводы алмазов без комиссий",
-  description: "pnk банк — ваш надежный партнер в мире Minecraft. Удобные переводы, оплата алмазами и безопасные финансовые операции в игре.",
+  description: "Ваш надежный партнер в мире Minecraft. Удобные переводы, оплата алмазами и безопасные финансовые операции в игре.",
   keywords: [
     "minecraft банк", 
     "оплата алмазами", 
@@ -57,21 +57,21 @@ export const metadata: Metadata = {
     title: "pnk банк - Онлайн-банк, переводы алмазов без комиссий",
     description: "pnk банк — ваш надежный партнер в мире Minecraft. Удобные переводы, оплата алмазами и безопасные финансовые операции в игре.",
     type: "website",
-    url: "https://pnk-bank.com",
+    url: "https://pnk-bank.vercel.app/",
     images: [
       {
-        url: "https://pnk-bank.com/og-image-minecraft.png",
+        url: "https://pnk-bank.vercel.app/twitter-icon.png",
         width: 1200,
         height: 630,
-        alt: "pnk банк - Minecraft банк",
+        alt: "pnk банк - Онлайн-банк, переводы алмазов без комиссий",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "pnk банк - Minecraft банк, оплата алмазами",
-    description: "pnk банк — ваш надежный партнер в мире Minecraft. Удобные переводы, оплата алмазами и безопасные финансовые операции в игре.",
-    images: ["https://pnk-bank.com/og-image-minecraft.png"],
+    title: "pnk банк - Онлайн-банк, переводы алмазов без комиссий",
+    description: "Ваш надежный партнер в мире Minecraft. Удобные переводы, оплата алмазами и безопасные финансовые операции в игре.",
+    images: ["https://pnk-bank.vercel.app/twitter-icon.png"],
   },
 };
 
