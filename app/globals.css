@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  display: none; 
+}
+
 html {
-  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+body {
+  -ms-overflow-style: none;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
