@@ -4,7 +4,7 @@ import { User, Card, Transactions, Notification } from "@prisma/client";
 import React from "react"
 import { AccountDetails, CardDetails, LastOperationDetails, NotificationDetails, TransactionDetails } from "./cabinet-details";
 // import { PremiumDetails } from "./cabinet-details/premium-details";
-import AOS from 'aos';
+// import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 interface Props {
