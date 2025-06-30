@@ -1,0 +1,179 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("POSTGRES_URL")
+    directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+    id          Int @id @default(autoincrement())
+
+    userName    String @unique
+    password    String
+    email       String?
+    imageUrl    String
+
+    card                 Card[]
+    sentTransactions     Transactions[] @relation("SenderRelation")
+    receivedTransactions Transactions[] @relation("RecipientRelation")
+    notifications        Notification[] 
+
+    discordId   String?
+    discordUser String?
+
+    userStatus  USER_STATUS @default(ACTIVE)
+    telegram    String?
+    codeWord    String?
+    role        USER_ROLE @default(USER)
+    premium     Premium[]
+
+    isGov       Boolean? @default(false)
+
+    lvl         Int? @default(1)
+    xp          Int? @default(0)
+
+    realName    String?
+    realNumber  String?
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Premium {
+    id          Int @id @default(autoincrement())
+
+    prefix      String @default("Premium")
+    beginning   DateTime @default(now())
+    ending      DateTime @default(now())
+
+    user        User @relation(fields: [userId], references: [id])
+    userId      Int
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Card {
+    id          Int @id @default(autoincrement()) 
+
+    name        String
+    balance     Float @default(0)
+    cardNumber  Int?
+    cvv         Int?
+    imageUrl    String
+
+    owner       User @relation(fields: [ownerId], references: [id])
+    ownerId     Int
+}
+
+model Transactions {
+    id              Int @id @default(autoincrement())
+    
+    sender          String 
+    recipient       String
+    amount          Float 
+    commission      Float
+    message         String
+
+    transactionSender           User @relation("SenderRelation", fields: [transactionSenderId], references: [id])
+    transactionRecipient        User @relation("RecipientRelation", fields: [transactionRecipientId], references: [id])
+    transactionSenderId         Int
+    transactionRecipientId      Int
+
+    type                        TRANSACTION_TYPE @default(TRANSFER)
+
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+}
+
+model Notification {
+    id          Int @id @default(autoincrement())
+
+    sender      String
+    recipient   User @relation(fields: [recipientId], references: [id])
+    recipientId Int
+    message     String
+    type        NOTIFICATION_TYPE @default(SYSTEM)
+
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+}
+
+model Application {
+    id          Int @id @default(autoincrement())
+
+    userName    String
+    telegram    String
+    discord     String
+    STATUS      APPLICATION_STATUS @default(WAITING)
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Level {
+    id          Int @id @default(autoincrement())
+
+    name        String
+    lvl         Int
+    xp          Int
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Payment {
+    id          Int @id @default(autoincrement())
+
+    paymentId       String @unique
+    amount          Float
+    recipient       String
+    shopUrl         String
+    sender          String?
+    description     String
+    status          PAYMENT_STATUS @default(PENDING)
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+enum APPLICATION_STATUS {
+    WAITING
+    REJECTED
+    ACTIVE
+}
+
+enum TRANSACTION_TYPE {
+    TRANSFER
+    PAYMENT
+    GOVERNMENT
+    BANK
+}
+
+enum PAYMENT_STATUS {
+    FAILED
+    PENDING
+    SUCCESS
+}
+
+enum NOTIFICATION_TYPE {
+    ADMIN
+    SYSTEM
+    PASSWORD
+    CODEWORD
+    INFO
+}
+
+enum USER_ROLE {
+    USER
+    MODER
+    ADMIN
+}
+
+enum USER_STATUS {
+    ACTIVE
+    BLOCKED
+}
