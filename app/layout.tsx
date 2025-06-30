@@ -83,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" /> 
+        <link rel="icon" href="/logo-pnk-bank-rounded.png" /> 
       </head>
       <body className={gtEsti.className}>
         <main className="min-h-screen">

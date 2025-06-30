@@ -31,15 +31,25 @@ export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications
             </div>
             <div className="flex flex-col pb-8 md:grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5 w-full px-4 md:px-8 lg:px-[8rem]">
                 <div className="flex flex-col gap-5">
-                    <CardDetails data-aos="fade-up" card={card}/>
-                    <AccountDetails data-aos="fade-left" data={data} />
+                    <div data-aos="fade-up">
+                        <CardDetails card={card}/>
+                    </div>
+                    <div data-aos="fade-left">
+                        <AccountDetails data={data} />
+                    </div>
                 </div>
                 <div>
-                    <LastOperationDetails data-aos="fade-up" transaction={transaction} data={data}/>
-                    <NotificationDetails data-aos="fade-down" className="mt-5" notifications={notifications}/>
+                    <div data-aos="fade-up">
+                        <LastOperationDetails transaction={transaction} data={data}/>
+                    </div>
+                    <div data-aos="fade-down">
+                        <NotificationDetails className="mt-5" notifications={notifications}/>
+                    </div>
                 </div>
                 <div className="flex flex-col gap-5">
-                    <TransactionDetails data-aos="fade-right" data={data} card={card}/>
+                    <div data-aos="fade-right">
+                        <TransactionDetails data={data} card={card}/>
+                    </div>
                     {/* <PremiumDetails username={data.userName}/> */}
                 </div>
             </div>
