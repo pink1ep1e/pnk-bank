@@ -1,10 +1,10 @@
 'use client';
 
 import { User, Card, Transactions, Notification } from "@prisma/client";
-import React from "react"
+import React, { useEffect } from "react"
 import { AccountDetails, CardDetails, LastOperationDetails, NotificationDetails, TransactionDetails } from "./cabinet-details";
 // import { PremiumDetails } from "./cabinet-details/premium-details";
-// import AOS from 'aos';
+import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 interface Props {
@@ -15,6 +15,14 @@ interface Props {
 }
 
 export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications }) => {
+
+    useEffect(() => {
+        AOS.init({
+          duration: 800, 
+          once: true, 
+        });
+      }, []);
+        
     return (
         <>  
             <div className="flex items-center md:flex-row justify-center m-auto font-semibold text-[48px] gap-2 select-none">

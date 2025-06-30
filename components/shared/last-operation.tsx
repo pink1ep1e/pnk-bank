@@ -164,7 +164,7 @@ export const LastOperation: React.FC<Props> = ({
     };
 
     return (
-        <div className={cn("mt-1 hover:bg-primary/5 active:bg-primary/10 rounded-[16px] cursor-pointer p-2 z-0", className)} onClick={toggleExpand}>
+        <div className={cn("hover:bg-primary/5 active:bg-primary/10 rounded-[16px] cursor-pointer p-2 z-0", className)} onClick={toggleExpand}>
             <Dialog>
                 <DialogTrigger asChild>
                     <div>
@@ -190,7 +190,7 @@ export const LastOperation: React.FC<Props> = ({
                         </div>
                     </div>
                 </DialogTrigger>
-                <DialogContent className="w-[400px] p-4 px-10 border bg-white shadow-md">
+                <DialogContent className="min-w-[400px] p-4 px-10 border bg-white shadow-md">
                     <DialogHeader>
                         <div className="flex gap-6">
                             <h1 className="text-[18px] font-semibold">ID операции: {id}</h1>
@@ -256,7 +256,7 @@ export const LastOperation: React.FC<Props> = ({
                             </div>
                         </div>
                     </div>
-                    <DialogFooter className="m-auto">
+                    <DialogFooter>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

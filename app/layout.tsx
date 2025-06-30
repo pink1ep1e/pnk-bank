@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "pnk банк - Онлайн-банк, переводы алмазов без комиссий",
-    description: "pnk банк — ваш надежный партнер в мире Minecraft. Удобные переводы, оплата алмазами и безопасные финансовые операции в игре.",
+    description: "Ваш надежный партнер в мире Minecraft. Удобные переводы, оплата алмазами и безопасные финансовые операции в игре.",
     type: "website",
     url: "https://pnk-bank.vercel.app/",
     images: [
@@ -82,6 +82,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" /> 
+      </head>
       <body className={gtEsti.className}>
         <main className="min-h-screen">
           <Providers>{children}</Providers>
