@@ -47,9 +47,7 @@ export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications
                     </div>
                 </div>
                 <div className="flex flex-col gap-5">
-                    <div data-aos="fade-right">
-                        <TransactionDetails data={data} card={card}/>
-                    </div>
+                    <TransactionDetails data={data} card={card}/>
                     {/* <PremiumDetails username={data.userName}/> */}
                 </div>
             </div>
