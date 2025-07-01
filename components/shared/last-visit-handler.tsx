@@ -12,15 +12,11 @@ export const LastVisitHandler = ({ userId }: LastVisitHandlerProps) => {
     const lastVisit = localStorage.getItem('lastVisit');
     const today = new Date().toISOString().split('T')[0];
 
-    if (lastVisit) {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayStr = yesterday.toISOString().split('T')[0];
-        console.log(lastVisit, yesterdayStr)
-      if (lastVisit === yesterdayStr) {
+    console.log(lastVisit, today)
+
+    if (lastVisit !== today) {
         AddXp(userId, 100);
       }
-    }
 
     localStorage.setItem('lastVisit', today);
   }, [userId]);
