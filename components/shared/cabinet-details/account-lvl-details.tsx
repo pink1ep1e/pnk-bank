@@ -32,6 +32,8 @@ interface Props {
 export const AccountLvlDetails: React.FC<Props> = ({ user, level, userTopLvl, className }) => {
     const [api, setApi] = React.useState<CarouselApi>()
     const [current, setCurrent] = React.useState(0)
+    const blacklist = ['pink1ep1e', 'government', 'bank'];
+
 
     const handleReturnToCurrentLevel = () => {
         if (!api) return
@@ -189,6 +191,7 @@ export const AccountLvlDetails: React.FC<Props> = ({ user, level, userTopLvl, cl
                     
                     <div className="mt-6 space-y-3 w-full rounded-[20px]">
                         {userTopLvl
+                            .filter(data => !blacklist.includes(data.userName))
                             .sort((a, b) => (b.lvl || 0) - (a.lvl || 0) || (b.xp || 0) - (a.xp || 0))
                             .slice(0, 5)
                             .map((data, index) => (
