@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
 export default function LandingPage() {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -615,3 +616,14 @@ export default function LandingPage() {
     </div>
   );
 }
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = e.currentTarget as HTMLAnchorElement;
+        const element = document.querySelector(target.getAttribute('href')!);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
