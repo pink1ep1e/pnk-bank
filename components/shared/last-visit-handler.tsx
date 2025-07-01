@@ -16,9 +16,9 @@ export const LastVisitHandler = ({ userId }: LastVisitHandlerProps) => {
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
       const yesterdayStr = yesterday.toISOString().split('T')[0];
-
+        console.log(lastVisit, yesterdayStr)
       if (lastVisit === yesterdayStr) {
-        AddXp(userId, 50);
+        AddXp(userId, 100);
       }
     }
 

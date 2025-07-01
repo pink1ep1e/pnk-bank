@@ -246,7 +246,7 @@ export async function updateCodeWord(value: string) {
             throw new Error("Ваша учетная запись заблокирована, вы не можете изменить код-слово.");
         }
 
-        if (findUser.codeWord === '') {
+        if (findUser.codeWord === null) {
             AddXp(findUser.id, 75);
         }
 
