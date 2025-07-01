@@ -2,6 +2,7 @@ import { AccountLvlDetails } from "@/components/shared/cabinet-details/account-l
 import { getUserSession } from "@/lib/get-user-session"
 import { prisma } from "@/prisma/prisma-client";
 import { redirect } from "next/navigation";
+import { UpdateLvl } from "@/lib/update-lvl";
 
 export default async function AccountLvlPage() {
   const session = await getUserSession();
@@ -29,6 +30,8 @@ export default async function AccountLvlPage() {
       xp: true,
     }
   });
+
+  UpdateLvl(user.id);
 
   return (
     <div>
