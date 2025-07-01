@@ -24,7 +24,7 @@ export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications
       }, []);
         
     return (
-        <>  
+        <div style={{overflow: 'hidden'}}>  
             <div className="flex items-center md:flex-row justify-center m-auto font-semibold text-[48px] gap-2 select-none">
                 <h1>pnk</h1>
                 <h1>банк</h1>
@@ -53,6 +53,6 @@ export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications
                     {/* <PremiumDetails username={data.userName}/> */}
                 </div>
             </div>
-        </>
+        </div>
     )
 }

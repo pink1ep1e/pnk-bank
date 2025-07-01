@@ -55,7 +55,7 @@ export default function LandingPage() {
       }, []);
 
   return (
-    <div>
+    <div style={{overflow: 'hidden'}}>
         {isLoading && (
             <div className="fixed top-0 left-0 w-full h-full bg-white flex items-center justify-center z-[9999]">
                 <div className='flex flex-col items-center justify-center'>
