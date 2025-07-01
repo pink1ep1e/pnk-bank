@@ -246,6 +246,10 @@ export async function updateCodeWord(value: string) {
             throw new Error("Ваша учетная запись заблокирована, вы не можете изменить код-слово.");
         }
 
+        if (findUser.codeWord === '') {
+            AddXp(findUser.id, 75);
+        }
+
         await prisma.user.update({
             where: {
                 id: findUser.id,
@@ -530,6 +534,8 @@ export async function createUser(data: string) {
         if (!createPremium) {
             throw new Error('Таблица Premium не была созданна, обратитесь к администратору.')
         }
+
+        AddXp(createUser.id, 50);
 
         await prisma.notification.create({
             data: {

@@ -32,7 +32,7 @@ interface Props {
 export const AccountLvlDetails: React.FC<Props> = ({ user, level, userTopLvl, className }) => {
     const [api, setApi] = React.useState<CarouselApi>()
     const [current, setCurrent] = React.useState(0)
-    const blacklist = ['pink1ep1e', 'government', 'bank'];
+    const blacklist = ['pink1ep1e', 'government', 'bank', 'pink1ep1e_user'];
 
 
     const handleReturnToCurrentLevel = () => {

@@ -4,6 +4,8 @@ import { getUserSession } from "@/lib/get-user-session"
 import { UpdateLvl } from "@/lib/update-lvl";
 import { prisma } from "@/prisma/prisma-client";
 import { redirect } from "next/navigation";
+import { useEffect } from 'react';
+import { AddXp } from "@/lib/add-xp";
 
 export default async function CabinetPage() {
   const session = await getUserSession();
@@ -44,7 +46,24 @@ export default async function CabinetPage() {
     }
   })
 
-  UpdateLvl(user.id)
+  useEffect(() => {
+    const lastVisit = localStorage.getItem('lastVisit');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (lastVisit) {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+      if (lastVisit === yesterdayStr) {
+        AddXp(user.id, 50);
+      }
+    }
+
+    localStorage.setItem('lastVisit', today);
+  }, [user.id]);
+
+  UpdateLvl(user.id);
 
   // ADMIN
 
