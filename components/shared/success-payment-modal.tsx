@@ -42,9 +42,9 @@ export const SuccessPaymentModal: React.FC<Props> = ({ isOpen, onClose, recipien
     if (!isOpen) return null;
 
     return (
-        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50'>
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[9999]'>
             <div
-                className="fixed inset-0 flex items-center justify-center z-50"
+                className="fixed inset-0 flex items-center justify-center z-[9999]"
                 style={{
                     opacity: show ? 1 : 0,
                     transform: show ? 'translateY(0)' : 'translateY(-50px)',
@@ -76,7 +76,7 @@ export const SuccessPaymentModal: React.FC<Props> = ({ isOpen, onClose, recipien
                                     }}
                                 >
                                     <div className='bg-gray-300/50 p-6 m-1 rounded-[28px]'>
-                                        <div className='bg-gray-500/50 p-4 rounded-[20px]'>
+                                        <div className='bg-gray-5/50 p-4 rounded-[20px]'>
                                             <div className='bg-black/40 p-2 rounded-[12px]'>
                                                 <Check className="w-full h-full text-white" />
                                             </div>
@@ -147,4 +147,4 @@ export const SuccessPaymentModal: React.FC<Props> = ({ isOpen, onClose, recipien
             </div>
         </div>
     );
-}; 
+};

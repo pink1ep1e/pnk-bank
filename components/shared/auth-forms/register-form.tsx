@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Mails, User, ShieldAlert, ArrowLeft, Smile } from "lucide-react";
+import { Mails, User, ShieldAlert, Smile } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { formRegisterSchema, TFormRegisterData } from "./schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
 import { createApplication } from "@/app/actions";
 import { useState, useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -28,7 +27,6 @@ interface Props {
 
 export const RegisterForm = ({ className, onFieldChange }: Props) => {
   const [agreementChecked, setAgreementChecked] = useState(false);
-  const router = useRouter()
   const [status, setStatus] = useState(1);
   
   const form = useForm<TFormRegisterData>({
