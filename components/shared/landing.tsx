@@ -27,10 +27,23 @@ export default function LandingPage() {
     const interval = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * hints.length);
       setHint(hints[randomIndex]);
-    }, 2000); // Меняем подсказку каждые 5 секунд
+    }, 2000);
   
     return () => clearInterval(interval);
   }, [hints]);
+
+  useEffect(() => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = e.currentTarget as HTMLAnchorElement;
+        const element = document.querySelector(target.getAttribute('href')!);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  }, []);
 
   const download = () => {
     toast({
@@ -616,14 +629,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = e.currentTarget as HTMLAnchorElement;
-        const element = document.querySelector(target.getAttribute('href')!);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-});
