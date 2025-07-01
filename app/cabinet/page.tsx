@@ -1,11 +1,10 @@
 import { AdminPanel } from "@/components/shared/admin-panel";
 import { Cabinet } from "@/components/shared/cabinet";
-import { getUserSession } from "@/lib/get-user-session"
+import { getUserSession } from "@/lib/get-user-session";
+import { LastVisitHandler } from "@/components/shared/last-visit-handler";
 import { UpdateLvl } from "@/lib/update-lvl";
 import { prisma } from "@/prisma/prisma-client";
 import { redirect } from "next/navigation";
-import { useEffect } from 'react';
-import { AddXp } from "@/lib/add-xp";
 
 export default async function CabinetPage() {
   const session = await getUserSession();
@@ -46,23 +45,6 @@ export default async function CabinetPage() {
     }
   })
 
-  useEffect(() => {
-    const lastVisit = localStorage.getItem('lastVisit');
-    const today = new Date().toISOString().split('T')[0];
-
-    if (lastVisit) {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayStr = yesterday.toISOString().split('T')[0];
-
-      if (lastVisit === yesterdayStr) {
-        AddXp(user.id, 50);
-      }
-    }
-
-    localStorage.setItem('lastVisit', today);
-  }, [user.id]);
-
   UpdateLvl(user.id);
 
   // ADMIN
@@ -72,7 +54,6 @@ export default async function CabinetPage() {
   const adminUsers =  await prisma.user.findMany();
 
   const adminApplications =  await prisma.application.findMany();
-
   return (
     <div className="bg-slate-50">
         <Cabinet transaction={transactions} data={user} card={cards} notifications={notifications}/>
@@ -81,6 +62,7 @@ export default async function CabinetPage() {
             (user.role === 'ADMIN' || user.role === 'MODER') ? <AdminPanel users={adminUsers} transactions={adminTransactions} applications={adminApplications}/> : ''
           }
         </div>
+        <LastVisitHandler userId={user.id} />
     </div>
   )
 }
