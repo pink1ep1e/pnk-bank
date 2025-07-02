@@ -10,8 +10,6 @@ import {
     CarouselContent,
     CarouselItem,
     CarouselApi,
-    CarouselPrevious,
-    CarouselNext,
   } from "@/components/ui/carousel"
 
 interface Props {
