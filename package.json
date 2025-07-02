@@ -30,6 +30,7 @@
     "@radix-ui/react-toast": "^1.2.6",
     "@twa-dev/sdk": "^8.0.2",
     "@yandex/smart-captcha": "2.7.0",
+    "@yudiel/react-qr-scanner": "^2.3.1",
     "aos": "^2.3.4",
     "axios": "^1.8.2",
     "bcrypt": "^5.1.1",

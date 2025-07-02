@@ -170,8 +170,8 @@ export const TransactionDetails: React.FC<Props> = ({ card, data, className }) =
                 <Title className="font-extrabold" text="Переводы" size='md'/>
                 <div>
                     <p className="text-[15px] text-slate-600 mt-2">СЧЕТ СПИСАНИЯ</p>
-                    <div className="rounded-[20px] bg-primary/5 pt-[18px] pb-[18px] pr-[25px] pl-[25px] mt-1">
-                        <div className="grid grid-cols-2 gap-5 items-center">
+                    <div className="rounded-[20px] bg-primary/5 pt-[16px] pb-[16px] pr-[25px] pl-[25px] lg:pt-[18px] lg:pb-[18px] lg:pr-[22px] lg:pl-[22px] mt-1">
+                        <div className="grid grid-cols-2 gap-5 items-center"> 
                             <div>
                                 <h1 className="text-[#434C55] text-[17px] lg:text-[22px]">Алмазный счет</h1>
                                 <div className="flex m-auto">
@@ -181,7 +181,7 @@ export const TransactionDetails: React.FC<Props> = ({ card, data, className }) =
                                         :
                                         <p className="font-bold text-[20px] lg:text-[25px] pr-[5px]">{card.balance.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/,/g, '|').replace(/\./g, ',').replace(/\|/g, '.')}</p>
                                     }
-                                    <p className="text-[20px]">ALM</p>
+                                    <p className="text-[16px] lg:text-[20px]">ALM</p>
                                 </div>
                             </div>
                             <div className="flex justify-end items-end">

@@ -3,9 +3,10 @@
 import { User, Card, Transactions, Notification } from "@prisma/client";
 import React, { useEffect } from "react"
 import { AccountDetails, CardDetails, LastOperationDetails, NotificationDetails, TransactionDetails } from "./cabinet-details";
-// import { PremiumDetails } from "./cabinet-details/premium-details";
+import { CreditCard, ArrowBigUpDash, ScanQrCode } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { CardButtons } from "./card-buttons";
 
 interface Props {
     data: User;
@@ -32,8 +33,9 @@ export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications
             <div className="flex flex-col pb-8 md:grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5 w-full px-4 md:px-8 lg:px-[8rem]">
                 <div className="flex flex-col gap-5">
                     <div data-aos="fade-up">
-                        <CardDetails card={card}/>
+                        <CardDetails data={data} card={card}/>
                     </div>
+                    <CardButtons />
                     <div data-aos="fade-left">
                         <AccountDetails data={data} />
                     </div>

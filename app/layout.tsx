@@ -27,6 +27,10 @@ const gtEsti = localFont({
 export const metadata: Metadata = {
   title: "pnk банк - Онлайн-банк, переводы алмазов без комиссий",
   description: "Ваш надежный партнер в мире Minecraft. Удобные переводы, оплата алмазами и безопасные финансовые операции в игре.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/logo-pnk-bank-rounded.png",
+  },
   keywords: [
     "minecraft банк", 
     "оплата алмазами", 
