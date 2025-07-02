@@ -28,8 +28,28 @@ export const metadata: Metadata = {
   title: "pnk банк - Онлайн-банк, переводы алмазов без комиссий",
   description: "Ваш надежный партнер в мире Minecraft. Удобные переводы, оплата алмазами и безопасные финансовые операции в игре.",
   icons: {
-    icon: "/favicon.ico",
-    apple: "/logo-pnk-bank-rounded.png",
+    icon: "/favicon/favicon.ico",
+    shortcut: "/favicon/favicon.ico",
+    apple: "/favicon/favicon-256x256.png",
+    other: [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        url: "/favicon/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        url: "/favicon/favicon-16x16.png",
+      },
+      {
+        rel: "mask-icon",
+        url: "/favicon/favicon.svg",
+        color: "#5bbad5",
+      },
+    ],
   },
   keywords: [
     "minecraft банк", 
@@ -88,6 +108,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/logo-pnk-bank-rounded.png" /> 
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/logo-pnk-bank-rounded.png" />
       </head>
       <body className={gtEsti.className} style={{ marginRight: "0px !important" }}>
         <main className="min-h-screen">

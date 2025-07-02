@@ -3,7 +3,6 @@
 import { User, Card, Transactions, Notification } from "@prisma/client";
 import React, { useEffect } from "react"
 import { AccountDetails, CardDetails, LastOperationDetails, NotificationDetails, TransactionDetails } from "./cabinet-details";
-import { CreditCard, ArrowBigUpDash, ScanQrCode } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { CardButtons } from "./card-buttons";
