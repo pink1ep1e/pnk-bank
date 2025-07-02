@@ -110,6 +110,8 @@ export default function RootLayout({
         <link rel="icon" href="/logo-pnk-bank-rounded.png" /> 
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/logo-pnk-bank-rounded.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
       </head>
       <body className={gtEsti.className} style={{ marginRight: "0px !important" }}>
         <main className="min-h-screen">
