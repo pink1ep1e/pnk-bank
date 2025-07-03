@@ -75,7 +75,15 @@ export const AccountDetails: React.FC<Props> = ({ data, className }) => {
                             <h1 className="text-[25px] font-semibold">lvl {data.lvl}</h1>
                         </div>
                     </div>
-                    <Button onClick={() => signOut({redirect: true, callbackUrl: "/login"})}  className="py-2 w-full mt-1 text-[19px]">Выход <LogOut /></Button>
+                    {/* <Button onClick={() => signOut({redirect: true, callbackUrl: "/login"})}  className="py-2 w-full mt-1 text-[19px]">Выход <LogOut /></Button> */}
+                    <div className="flex justify-center items-end w-full h-[45px]">
+                        <div className="flex justify-center items-center w-full hover:border transition-all cursor-pointer gap-3 h-[45px] rounded-[18px] bg-gradient-to-r from-white to-primary/10">
+                            <p className="font-semibold text-[18px] pt-1">Подписка</p>
+                            <div className="bg-black text-white px-[14px] text-[18px] rounded-[16px]">
+                                <p className="pt-1">Неактивна</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -140,6 +148,18 @@ export const AccountDetails: React.FC<Props> = ({ data, className }) => {
                     </div>
                     <div className="flex justify-center items-center ml-auto">
                         <ChevronRight size={20}/>
+                    </div>
+                </div>
+                <div onClick={() => signOut({redirect: true, callbackUrl: "/login"})} className="flex cursor-pointer hover:bg-primary/5 rounded-[12px] p-2 justify-start items-center gap-3">
+                    <div className="flex rounded-[16px] h-[55px] w-[55px] md:h-[60px] md:w-[60px] items-center justify-center border border-primary/30 bg-white p-3">
+                        <LogOut className="w-[25px] h-[25px] md:w-[29px] md:h-[29px]" />
+                    </div>
+                    <div className="items-center"> 
+                        <p className="text-[18px] lg:text-[20px] text-left font-regular">Выход</p>
+                        <p className="text-[14px] lg:text-[18px] text-left font-regular text-[#434C55]">Выход из аккаунта</p>
+                    </div>
+                    <div className="flex justify-end items-end ml-auto">
+                        <ChevronRight className="pr-auto" size={20}/>
                     </div>
                 </div>
             </div>

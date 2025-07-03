@@ -65,7 +65,7 @@ export const CodeWordDialog: React.FC<Props> = ({ className }) => {
                 <Dialog>
                     <DialogTrigger asChild>
                     <div className="flex cursor-pointer hover:bg-primary/5 rounded-[12px] p-2 justify-start items-center gap-3">
-                        <div className="flex  rounded-[16px] h-[55px] w-[55px] md:h-[60px] md:w-[60px] items-center justify-center shadow-md border border-primary/30 bg-white p-3">
+                        <div className="flex  rounded-[16px] h-[55px] w-[55px] md:h-[60px] md:w-[60px] items-center justify-center border border-primary/30 bg-white p-3">
                             <RectangleEllipsis className="w-[25px] h-[25px] md:w-[30px] md:h-[30px]"/>
                         </div>
                         <div className="items-center"> 
