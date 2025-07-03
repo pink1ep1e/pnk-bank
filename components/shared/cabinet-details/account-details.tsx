@@ -4,7 +4,6 @@ import { User, USER_STATUS } from "@prisma/client";
 import React, { useState } from "react"
 import { cn } from "@/lib/utils";
 import { LogOut, ChevronRight, CircleHelp, AlertCircle, Rocket } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
 import { CodeWordDialog } from "../dialog/code-word-dialog";
 import { ChangePasswordDialog } from "../dialog/change-password-dialog";
