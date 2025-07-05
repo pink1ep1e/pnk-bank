@@ -620,7 +620,7 @@ export async function createAdminTransaction({ recipientName, amount }: { recipi
                 recipient: findRecipient.userName,
                 amount: amount,
                 commission: 0,
-                message: `Пополнение от ${new Date().toLocaleString()}`,
+                message: `Пополнение от ${findSender.userName} в ${new Date().toLocaleString()}`,
                 transactionSenderId: findSender.id,
                 transactionRecipientId: findRecipient.id,
             }
