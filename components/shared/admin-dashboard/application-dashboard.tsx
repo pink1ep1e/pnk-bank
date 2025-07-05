@@ -13,7 +13,7 @@ interface Props {
 
 export const ApplicationDashboard: React.FC<Props> = ({ applications }) => {
     return (
-        <div className="border border-primary mt-4 bg-white rounded-[20px] border-black w-full h-fit pt-[30px] pb-[30px] pr-[45px] pl-[45px]">        
+        <div className="shadow-md border-primary bg-white rounded-[20px] border border-slate-200 w-full h-fit pt-[20px] pb-[15px] pr-[25px] pl-[25px] lg:pt-[30px] lg:pb-[30px] lg:pr-[45px] lg:pl-[45px]">        
             <Title className="font-extrabold" text="Заявки на создание личного кабинета" size='md'/>
             <div className="flex gap-6">
                 <p className="font-regular text-sm sm:text-base lg:text-lg">Заявки на создание счета.</p>

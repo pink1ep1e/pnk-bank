@@ -2,28 +2,32 @@
 
 import { User, Transactions, Application } from "@prisma/client";
 import React, { useState } from "react"
-import { UsersDashboard } from "./admin-dashboard/users-dashboard";
-import { Title } from "./title";
+import { UsersDashboard } from "./users-dashboard";
+import { Title } from "../title";
 import { Search } from "lucide-react";
-import { Input } from "../ui/input";
-import { RegisterUsersDashboard } from "./admin-dashboard/register-user-dashboard";
-import { BankInfoDashboard } from "./admin-dashboard/bank-info-dashboard";
-import { ApplicationDashboard } from "./admin-dashboard/application-dashboard";
-import { ScrollArea } from "../ui/scroll-area";
+import { Input } from "../../ui/input";
+import { RegisterUsersDashboard } from "./register-user-dashboard";
+import { BankInfoDashboard } from "./bank-info-dashboard";
+import { ApplicationDashboard } from "./application-dashboard";
+import { ScrollArea } from "../../ui/scroll-area";
+import { AdminHeader } from "./admin-header";
+import { AdminTransaction } from "./admin-transaction";
 
 interface Props {
     users: User[];
+    sessionUser: User;
     transactions: Transactions[];
     applications: Application[]
 }
 
-export const AdminPanel: React.FC<Props> = ({ users, transactions, applications}) => {
+export const AdminPanel: React.FC<Props> = ({ users, transactions, applications, sessionUser}) => {
     const [ searchUser, setSearchUser] = useState('');
 
     return (
         <>  
-            <div className="w-full mt-8 pb-8 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                <div className="border border-primary bg-white rounded-[20px] border-black w-full pt-[25px] pb-[25px] pr-[35px] pl-[35px]">
+            <div className="w-full mt-0 pb-8 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                <AdminHeader user={sessionUser}/>
+                <div className="shadow-md border-primary bg-white rounded-[20px] border border-slate-200 w-full h-fit pt-[20px] pb-[15px] pr-[25px] pl-[25px] lg:pt-[30px] lg:pb-[30px] lg:pr-[45px] lg:pl-[45px]">
                     <Title className="font-extrabold" text="Управление пользователями банка" size='md'/>
                     <div className="flex flex-col sm:flex-row gap-4">
                         <p className="font-regular text-sm sm:text-base lg:text-lg">Всего пользователей банка: {users.length}</p>
@@ -63,11 +67,14 @@ export const AdminPanel: React.FC<Props> = ({ users, transactions, applications}
                             ))}
                         </ScrollArea>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
                     <RegisterUsersDashboard />
                     <BankInfoDashboard transactions={transactions}/>
                 </div>
-                <div className="grid gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                    <AdminTransaction />
+                </div>
+                <div className="grid gap-4 mt-4">
                     <ApplicationDashboard applications={applications}/>
                 </div>
             </div>

@@ -10,13 +10,15 @@ import { ChangePasswordDialog } from "../dialog/change-password-dialog";
 import { useRouter } from "next/navigation";
 import { Title } from "../title";
 import Image from 'next/image';
+import { AdminButton } from "../admin-dashboard/admin-button";
 
 interface Props {
     data: User;
     className?: string;
+    admin: boolean;
 }
 
-export const AccountDetails: React.FC<Props> = ({ data, className }) => {
+export const AccountDetails: React.FC<Props> = ({ data, className, admin }) => {
     const router = useRouter()
     const [showTooltip, setShowTooltip] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
@@ -120,6 +122,9 @@ export const AccountDetails: React.FC<Props> = ({ data, className }) => {
             <div className="rounded-[20px] gap=4 bg-primary/5 p-[6px] lg:p-[10px] mt-4">
                 <CodeWordDialog />
                 <ChangePasswordDialog />
+                {
+                    admin ? <AdminButton /> : ''
+                }
             </div>
             
             <div className="rounded-[20px] gap-4 bg-primary/5 p-[6px] lg:p-[10px] mt-4">
@@ -166,3 +171,4 @@ export const AccountDetails: React.FC<Props> = ({ data, className }) => {
         </>
     )
 }
+

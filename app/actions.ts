@@ -554,3 +554,80 @@ export async function createUser(data: string) {
         throw error;
     }
 }
+
+export async function createAdminTransaction({ recipientName, amount }: { recipientName: string, amount: number}) {
+    try {
+
+        const currentUser = await getUserSession()
+        
+        if (!currentUser) {
+            throw new Error("Пользователь не найден, перезайдите в аккаунт!")
+        }
+
+
+        const findRecipient = await prisma.user.findFirst({
+            where: {
+                userName: recipientName,
+            }
+        })
+
+        if (!findRecipient) {
+            throw new Error("Получатель не найден, введите верного получателя!")
+        }
+
+
+        const findSender = await prisma.user.findFirst({
+            where: {
+                userName: 'bank',
+            }
+        })
+
+        if (!findSender) {
+            throw new Error("Отправитель не найден, перезайдите в аккаунт!")
+        }
+
+        const cardRecipient = await prisma.card.findFirst({
+            where: {
+                ownerId: findRecipient.id,
+            }
+        })
+
+        if (!cardRecipient) {
+            throw new Error("Карта отправителя не найдена, обратитесь в тех.поддержку.")
+        }
+        
+
+        if (Number(currentUser.id) === findRecipient.id) {
+            throw new Error("Нельзя отправить самому себе, укажите другого получателя!")
+        }
+
+        if (findSender.userStatus == "BLOCKED") {
+            throw new Error("Ваш аккаунт заблокирован, обратитесь в поддержку.")
+        }
+
+        await prisma.card.update({
+            where: {
+                id: cardRecipient.id,
+            },
+            data: {
+                balance: cardRecipient.balance + amount,
+            }
+        })
+
+        await prisma.transactions.create({
+            data: {
+                sender: findSender.userName,
+                recipient: findRecipient.userName,
+                amount: amount,
+                commission: 0,
+                message: `Пополнение от ${new Date().toLocaleString()}`,
+                transactionSenderId: findSender.id,
+                transactionRecipientId: findRecipient.id,
+            }
+        })
+        
+    } catch (error) {
+        console.log('Error [CREATE_ADMIN_TRANSACTION]', error)
+        throw error;
+    }
+}

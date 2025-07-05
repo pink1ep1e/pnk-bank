@@ -11,10 +11,11 @@ interface Props {
     data: User;
     card: Card;
     transaction: Transactions[];
-    notifications: Notification[]   
+    notifications: Notification[];
+    admin: boolean;
 }
 
-export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications }) => {
+export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications, admin}) => {
 
     useEffect(() => {
         AOS.init({
@@ -36,7 +37,7 @@ export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications
                     </div>
                     <CardButtons />
                     <div data-aos="fade-left">
-                        <AccountDetails data={data} />
+                        <AccountDetails data={data} admin={admin}/>
                     </div>
                 </div>
                 <div>

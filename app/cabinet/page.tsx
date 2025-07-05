@@ -1,4 +1,3 @@
-import { AdminPanel } from "@/components/shared/admin-panel";
 import { Cabinet } from "@/components/shared/cabinet";
 import { getUserSession } from "@/lib/get-user-session";
 import { LastVisitHandler } from "@/components/shared/last-visit-handler";
@@ -8,6 +7,7 @@ import { redirect } from "next/navigation";
 
 export default async function CabinetPage() {
   const session = await getUserSession();
+  let admin = false;
 
   if (!session) {
     return redirect('/login');
@@ -47,21 +47,14 @@ export default async function CabinetPage() {
 
   UpdateLvl(user.id);
 
-  // ADMIN
+  if (user.role === 'ADMIN' || user.role === 'MODER') {
+    admin = true;
+  }
 
-  const adminTransactions = await prisma.transactions.findMany();
-
-  const adminUsers =  await prisma.user.findMany();
-
-  const adminApplications =  await prisma.application.findMany();
   return (
     <div className="bg-slate-50">
-        <Cabinet transaction={transactions} data={user} card={cards} notifications={notifications}/>
-        <div>
-          {
-            (user.role === 'ADMIN' || user.role === 'MODER') ? <AdminPanel users={adminUsers} transactions={adminTransactions} applications={adminApplications}/> : ''
-          }
-        </div>
+        <Cabinet transaction={transactions} data={user} card={cards} notifications={notifications} admin={admin}/>
+
         <LastVisitHandler userId={user.id} />
     </div>
   )
