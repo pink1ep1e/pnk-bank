@@ -2,6 +2,7 @@
 
 import { AddXp } from "@/lib/add-xp";
 import { checkPremium } from "@/lib/check-premium";
+import { CreateLog } from "@/lib/create-log";
 import { generateRandomPassword } from "@/lib/generate-random-password";
 import { getUserSession } from "@/lib/get-user-session";
 import { prisma } from "@/prisma/prisma-client";
@@ -365,6 +366,18 @@ export async function banUser_Admin(id: number) {
                 type: NOTIFICATION_TYPE.ADMIN
             }
         })
+
+        const findAdmin = await prisma.user.findFirst({
+            where: {
+                id: Number(currentUser.id),
+            }
+        })
+
+        if (!findAdmin) {
+            throw new Error("Администратор не найден, перезайдите в аккаунт!")
+        }
+
+        await CreateLog(findAdmin.userName, `Заблокировал пользователя ${findUser.userName}`)
         
     } catch (error) {
         console.log('Error [UPD_BAN]', error);
@@ -408,6 +421,18 @@ export async function unBanUser_Admin(id: number) {
                 type: NOTIFICATION_TYPE.ADMIN
             }
         })
+
+        const findAdmin = await prisma.user.findFirst({
+            where: {
+                id: Number(currentUser.id),
+            }
+        })
+
+        if (!findAdmin) {
+            throw new Error("Администратор не найден, перезайдите в аккаунт!")
+        }
+
+        await CreateLog(findAdmin.userName, `Разблокировал пользователя ${findUser.userName}`)
         
     } catch (error) {
         console.log('Error [UPD_UNBAN]', error);
@@ -451,6 +476,18 @@ export async function changePassword_Admin(id: number, password: string) {
                 type: NOTIFICATION_TYPE.SYSTEM
             }
         })
+
+        const findAdmin = await prisma.user.findFirst({
+            where: {
+                id: Number(currentUser.id),
+            }
+        })
+
+        if (!findAdmin) {
+            throw new Error("Администратор не найден, перезайдите в аккаунт!")
+        }
+
+        await CreateLog(findAdmin.userName, `Изменил пароль для пользователя ${findUser.userName}`)
         
     } catch (error) {
         console.log('Error [UPD_CHANGE_PASSWORD]', error);
@@ -546,6 +583,17 @@ export async function createUser(data: string) {
             }
         })
 
+        const findAdmin = await prisma.user.findFirst({
+            where: {
+                id: Number(currentUser.id),
+            }
+        })
+
+        if (!findAdmin) {
+            throw new Error("Администратор не найден, перезайдите в аккаунт!")
+        }
+
+        await CreateLog(findAdmin.userName, `Добавил нового пользователя ${createUser.userName}`)
 
         return { createUser, generatePassword} ;
         
@@ -625,6 +673,18 @@ export async function createAdminTransaction({ recipientName, amount }: { recipi
                 transactionRecipientId: findRecipient.id,
             }
         })
+
+        const findAdmin = await prisma.user.findFirst({
+            where: {
+                id: Number(currentUser.id),
+            }
+        })
+
+        if (!findAdmin) {
+            throw new Error("Администратор не найден, перезайдите в аккаунт!")
+        }
+
+        await CreateLog(findAdmin.userName, `Выполнил пополнение на сумму ${amount} для пользователя ${findRecipient.userName}`)
         
     } catch (error) {
         console.log('Error [CREATE_ADMIN_TRANSACTION]', error)

@@ -1,6 +1,6 @@
 'use client';
 
-import { User, Transactions, Application } from "@prisma/client";
+import { User, Transactions, Application, Logs } from "@prisma/client";
 import React, { useState } from "react"
 import { UsersDashboard } from "./users-dashboard";
 import { Title } from "../title";
@@ -12,15 +12,17 @@ import { ApplicationDashboard } from "./application-dashboard";
 import { ScrollArea } from "../../ui/scroll-area";
 import { AdminHeader } from "./admin-header";
 import { AdminTransaction } from "./admin-transaction";
+import { AdminLogs } from "./admin-logs";
 
 interface Props {
     users: User[];
     sessionUser: User;
     transactions: Transactions[];
-    applications: Application[]
+    applications: Application[];
+    logs: Logs[];
 }
 
-export const AdminPanel: React.FC<Props> = ({ users, transactions, applications, sessionUser}) => {
+export const AdminPanel: React.FC<Props> = ({ users, transactions, applications, sessionUser, logs}) => {
     const [ searchUser, setSearchUser] = useState('');
 
     return (
@@ -71,8 +73,9 @@ export const AdminPanel: React.FC<Props> = ({ users, transactions, applications,
                     <RegisterUsersDashboard />
                     <BankInfoDashboard transactions={transactions}/>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
                     <AdminTransaction />
+                    <AdminLogs logs={logs} />
                 </div>
                 <div className="grid gap-4 mt-4">
                     <ApplicationDashboard initialApplications={applications}/>

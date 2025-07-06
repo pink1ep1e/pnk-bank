@@ -30,10 +30,12 @@ export default async function AccountLvlPage() {
 
   const Applications =  await prisma.application.findMany();
 
+  const Logs =  await prisma.logs.findMany();
+
 
   return (
     <div className="bg-slate-50">
-        <AdminPanel users={Users} transactions={Transactions} applications={Applications} sessionUser={user}/>
+        <AdminPanel users={Users} transactions={Transactions} applications={Applications} sessionUser={user} logs={Logs}/>
     </div>
   );
 }
