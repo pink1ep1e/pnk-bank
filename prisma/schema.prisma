@@ -5,7 +5,6 @@ generator client {
 datasource db {
     provider    = "postgresql"
     url         = env("POSTGRES_URL")
-    directUrl   = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
@@ -135,6 +134,16 @@ model Payment {
     sender          String?
     description     String
     status          PAYMENT_STATUS @default(PENDING)
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Logs {
+    id          Int @id @default(autoincrement())
+
+    admin           String
+    description     String
 
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
