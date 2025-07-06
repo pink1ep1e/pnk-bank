@@ -28,13 +28,13 @@ export const AdminLogs: React.FC<Props> = ({ logs }) => {
 
     return (
         <div className="shadow-md border-primary bg-white rounded-[20px] border border-slate-200 w-full h-fit pt-[20px] pb-[15px] pr-[25px] pl-[25px] lg:pt-[30px] lg:pb-[30px] lg:pr-[45px] lg:pl-[45px]">
-            <Title className="font-extrabold" text="Управление пользователями банка" size='md'/>
+            <Title className="font-extrabold" text="Действия всех администраторов" size='md'/>
             <div className="flex flex-col sm:flex-row gap-4">
                 <p className="font-regular text-sm sm:text-base lg:text-lg">Кол-во операций за день: {logsToday.length}</p>
             </div>
             <div className="flex justify-center items-center w-full mt-2">
                 <Input 
-                    placeholder="Введите никнейм админа"
+                    placeholder="Введите никнейм администратора"
                     value={searchUser} 
                     onChange={(e) => setSearchUser(e.target.value)} 
                 />
