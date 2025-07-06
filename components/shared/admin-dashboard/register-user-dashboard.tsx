@@ -81,8 +81,7 @@ export const RegisterUsersDashboard: React.FC<Props> = ({ className }) => {
                 <Title className="font-extrabold" text="Регистрация новых пользователей" size='md'/>
                 <div className="flex gap-6">
                     <p className="font-regular text-sm sm:text-base lg:text-lg">
-                        При регистрации новых пользователей будьте внимательны, так как исправление ошибок ложится на наши плечи. 
-                        Помните, что от вашей ответственности зависит безопасность и удобство работы пользователей с системой.
+                        Вносим данные и не закрываем окно до тех пор, пока не отправили сообщение клиенту!
                     </p>
                 </div>  
                     <Form {...form}>

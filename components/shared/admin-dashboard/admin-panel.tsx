@@ -13,6 +13,7 @@ import { ScrollArea } from "../../ui/scroll-area";
 import { AdminHeader } from "./admin-header";
 import { AdminTransaction } from "./admin-transaction";
 import { AdminLogs } from "./admin-logs";
+import { AdminWarring } from "./admin-warring";
 
 interface Props {
     users: User[];
@@ -70,7 +71,10 @@ export const AdminPanel: React.FC<Props> = ({ users, transactions, applications,
                         </ScrollArea>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
-                    <RegisterUsersDashboard />
+                    <div className="flex flex-col">
+                        <RegisterUsersDashboard />
+                        <AdminWarring />
+                    </div>
                     <BankInfoDashboard transactions={transactions}/>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">

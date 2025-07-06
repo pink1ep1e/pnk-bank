@@ -304,7 +304,12 @@ export const AdminTransaction: React.FC<Props> = ({ className }) => {
                                 disabled={amount == 0 || amount < 0 || amount > 100000} 
                                 size={"lg"}
                             >
-                                {"Пополнить " + amount.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/,/g, '|').replace(/\./g, ',').replace(/\|/g, '.') + " ALM"}
+                                {
+                                amount > 0 ?
+                                    "Пополнить " + amount.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/,/g, '|').replace(/\./g, ',').replace(/\|/g, '.') + " ALM"
+                                :
+                                    "Введите сумму пополнения"    
+                                }
                             </Button>
                             </div>
                         </form>
