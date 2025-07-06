@@ -349,7 +349,7 @@ export async function banUser_Admin(id: number) {
             throw new Error("Пользователь не найден в базе данных.");
         }
 
-        await prisma.user.update({
+        const banUser = await prisma.user.update({
             where: {
                 id: id,
             },
@@ -377,7 +377,7 @@ export async function banUser_Admin(id: number) {
             throw new Error("Администратор не найден, перезайдите в аккаунт!")
         }
 
-        await CreateLog(findAdmin.userName, `Заблокировал пользователя ${findUser.userName}`)
+        await CreateLog(findAdmin.userName, `Заблокировал пользователя ${banUser.userName}`)
         
     } catch (error) {
         console.log('Error [UPD_BAN]', error);
@@ -404,7 +404,7 @@ export async function unBanUser_Admin(id: number) {
             throw new Error("Пользователь не найден в базе данных.");
         }
 
-        await prisma.user.update({
+        const unBanUser = await prisma.user.update({
             where: {
                 id: id,
             },
@@ -432,7 +432,7 @@ export async function unBanUser_Admin(id: number) {
             throw new Error("Администратор не найден, перезайдите в аккаунт!")
         }
 
-        await CreateLog(findAdmin.userName, `Разблокировал пользователя ${findUser.userName}`)
+        await CreateLog(findAdmin.userName, `Разблокировал пользователя ${unBanUser.userName}`)
         
     } catch (error) {
         console.log('Error [UPD_UNBAN]', error);
@@ -459,7 +459,7 @@ export async function changePassword_Admin(id: number, password: string) {
             throw new Error("Пользователь не найден в базе данных.");
         }
 
-        await prisma.user.update({
+        const updatePassword = await prisma.user.update({
             where: {
                 id: id,
             },
@@ -487,7 +487,7 @@ export async function changePassword_Admin(id: number, password: string) {
             throw new Error("Администратор не найден, перезайдите в аккаунт!")
         }
 
-        await CreateLog(findAdmin.userName, `Изменил пароль для пользователя ${findUser.userName}`)
+        await CreateLog(findAdmin.userName, `Изменил пароль для пользователя ${updatePassword.userName}`)
         
     } catch (error) {
         console.log('Error [UPD_CHANGE_PASSWORD]', error);
