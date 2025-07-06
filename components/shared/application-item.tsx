@@ -25,6 +25,7 @@ export const ApplicationItem: React.FC<Props> = ({
     status,
     createdAt
  }) => {
+    const date = new Date(createdAt);
 
     const onChangeStatusSuccess = async (id: number) => {
         try {
@@ -89,11 +90,11 @@ export const ApplicationItem: React.FC<Props> = ({
                 </div>
                 <div className="w-full">
                     <p className="font-semibold text-[16px] mb-1">Дата</p>
-                    <h1>{createdAt.toLocaleDateString()}</h1>
+                    <h1>{date.toLocaleDateString()}</h1>
                 </div>
                 <div className="w-full">
                     <p className="font-semibold text-[16px] mb-1">Время</p>
-                    <h1>{createdAt.toLocaleString()}</h1>
+                    <h1>{date.toLocaleString()}</h1>
                 </div>
 
 

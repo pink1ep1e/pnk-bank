@@ -75,7 +75,7 @@ export const AdminPanel: React.FC<Props> = ({ users, transactions, applications,
                     <AdminTransaction />
                 </div>
                 <div className="grid gap-4 mt-4">
-                    <ApplicationDashboard applications={applications}/>
+                    <ApplicationDashboard initialApplications={applications}/>
                 </div>
             </div>
         </>
