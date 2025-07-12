@@ -3,7 +3,7 @@ import { prisma } from "@/prisma/prisma-client";
 import { redirect } from "next/navigation";
 import { AdminPanel } from "@/components/shared/admin-dashboard/admin-panel";
 
-export default async function AccountLvlPage() {
+export default async function AccountDashboard() {
   const session = await getUserSession();
 
   if (!session) {
@@ -34,7 +34,7 @@ export default async function AccountLvlPage() {
 
 
   return (
-    <div className="bg-slate-50">
+    <div className="h-full bg-slate-50">
         <AdminPanel users={Users} transactions={Transactions} applications={Applications} sessionUser={user} logs={Logs}/>
     </div>
   );

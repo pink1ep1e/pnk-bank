@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from 'next/font/local'
 import "./globals.css";
 import { Providers } from "@/components/shared/providers";
+import { Analytics } from "@vercel/analytics/next"
 
 const gtEsti = localFont({
   src: [
@@ -123,6 +124,7 @@ export default function RootLayout({
       <body className={gtEsti.className} style={{ marginRight: "0px !important" }}>
         <main className="min-h-screen">
           <Providers>{children}</Providers>
+          <Analytics/>
         </main>
       </body>
     </html>

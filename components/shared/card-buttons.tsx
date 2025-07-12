@@ -24,7 +24,7 @@ export const CardButtons: React.FC<Props> = ({ className }) => {
     };
     return (
             <div className={cn("flex justify-center items-center mt-2 gap-8", className)}>
-                    <a className="hover:transform hover:-translate-y-0.5 transition-all will-change-transform" href="#">
+                    <a className="hover:transform hover:-translate-y-0.5 transition-all will-change-transform" href="/cabinet/replenish">
                         <div className="flex flex-col justify-center items-center h-[100px] w-[105px] text-center leading-tight">
                             <div className="p-1 bg-black rounded-[18px] h-[50px] w-[105px] text-white flex justify-center items-center">
                                 <CreditCard size={32}/>

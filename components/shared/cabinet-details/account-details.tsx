@@ -123,7 +123,7 @@ export const AccountDetails: React.FC<Props> = ({ data, className, admin }) => {
                 <CodeWordDialog />
                 <ChangePasswordDialog />
                 {
-                    admin ? <AdminButton /> : ''
+                    admin ? <AdminButton role={data.role}/> : ''
                 }
             </div>
             

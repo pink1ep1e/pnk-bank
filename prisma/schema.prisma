@@ -149,6 +149,55 @@ model Logs {
     updatedAt   DateTime @updatedAt
 }
 
+model Replenish {
+    id          Int @id @default(autoincrement())
+
+    recipient       String
+    courier         String?
+    operationType   OPERATION_TYPE @default(REPLENISHMENT)
+    operationMethod OPERATION_METHOD @default(CHEST)    
+    coordinates     String
+    amount          Int
+    сomment         String?
+    runTime         Int?
+    waitingTime     DateTime?
+
+    status          REPLENISH_STATUS @default(PENDING)
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Courier {
+    id          Int @id @default(autoincrement())
+
+    courierName     String
+    rating          Float
+    score           Int
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+
+enum OPERATION_TYPE {
+    REPLENISHMENT
+    WITHDRAWAL
+}
+
+enum OPERATION_METHOD {
+    MEET
+    CHEST
+}
+
+enum REPLENISH_STATUS {
+    REJECTED
+    PENDING
+    WAITING
+    SUCCESS
+}
+
+
 enum APPLICATION_STATUS {
     WAITING
     REJECTED

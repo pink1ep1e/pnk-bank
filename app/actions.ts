@@ -6,7 +6,7 @@ import { CreateLog } from "@/lib/create-log";
 import { generateRandomPassword } from "@/lib/generate-random-password";
 import { getUserSession } from "@/lib/get-user-session";
 import { prisma } from "@/prisma/prisma-client";
-import { APPLICATION_STATUS, NOTIFICATION_TYPE } from "@prisma/client";
+import { APPLICATION_STATUS, NOTIFICATION_TYPE, OPERATION_METHOD, OPERATION_TYPE, REPLENISH_STATUS } from "@prisma/client";
 import { compare, hashSync } from "bcrypt";
 
 export async function createTransaction({ recipientName, amount, message }: { recipientName: string, amount: number, message: string }) {
@@ -321,6 +321,66 @@ export async function updatePassword(newPassword: string, currentPassword: strin
                 recipientId: findUser.id,
                 message: 'Вы успешно изменили свой пароль. Мы рекомендуем менять его каждые 3 месяца для вашей безопасности.',
                 type: NOTIFICATION_TYPE.PASSWORD
+            }
+        })
+        
+    } catch (error) {
+        console.log('Error [UPD_PASSWORD]', error);
+        throw error;
+    }
+}
+
+export async function createNewReplenish(
+    action: "replenish" | "withdraw" | null,
+    method: string | null,
+    coordinates: string,
+    amount: number,
+    comment: string
+) {
+    try {
+
+        const currentUser = await getUserSession()
+        
+        if (!currentUser) {
+            throw new Error("Пользователь не найден, перезайдите в аккаунт!")
+        }
+
+        const findUser = await prisma.user.findFirst({
+            where: {
+                id: Number(currentUser.id)
+            }
+        });
+
+        if (!findUser) {
+            throw new Error("Пользователь не найден в базе данных.");
+        }
+
+        if (findUser.userStatus === 'BLOCKED') {
+            throw new Error("Ваша учетная запись заблокирована, вы не можете заказать услугу.");
+        }
+
+        let operType
+        if (action === "replenish") {
+            operType = OPERATION_TYPE.REPLENISHMENT;
+        } else if (action === "withdraw") {
+            operType = OPERATION_TYPE.WITHDRAWAL;
+        }
+
+        let operMethod
+        if (method === "meet") {
+            operMethod = OPERATION_METHOD.MEET;
+        } else if (method === "chest") {
+            operMethod = OPERATION_METHOD.CHEST;
+        }
+
+        await prisma.replenish.create({
+            data: {
+                recipient: findUser.userName,
+                operationType: operType,
+                operationMethod: operMethod,
+                coordinates: coordinates,
+                amount: amount,
+                сomment: comment,
             }
         })
         
@@ -688,6 +748,245 @@ export async function createAdminTransaction({ recipientName, amount }: { recipi
         
     } catch (error) {
         console.log('Error [CREATE_ADMIN_TRANSACTION]', error)
+        throw error;
+    }
+}
+
+export async function TakeRequest(id: number, runTime: number) {
+    try {
+
+        const currentUser = await getUserSession()
+        
+        if (!currentUser) {
+            throw new Error("Пользователь не найден, перезайдите в аккаунт!")
+        }
+
+        const User = await prisma.user.findFirst({
+            where: {
+                id: Number(currentUser.id),
+            }
+        })
+
+        if (!User) {
+            throw new Error("Пользователь не найден, перезайдите в аккаунт!")
+        }
+
+
+
+        const findRequest = await prisma.replenish.findFirst({
+            where: {
+                id: id
+            }
+        })
+
+        if (!findRequest) {
+            throw new Error("Заявка не найдена!")
+        }
+
+        await prisma.replenish.update({
+            where: {
+                id: id,
+            },
+            data: {
+                courier: User.userName,
+                waitingTime: new Date(), 
+                runTime: runTime,
+                status: REPLENISH_STATUS.WAITING
+            }
+        })
+        
+    } catch (error) {
+        console.log('Error [TAKE_REQUEST]', error)
+        throw error;
+    }
+}
+
+export async function CancelRequest(id: number) {
+    try {
+
+        const currentUser = await getUserSession()
+        
+        if (!currentUser) {
+            throw new Error("Пользователь не найден, перезайдите в аккаунт!")
+        }
+
+        const User = await prisma.user.findFirst({
+            where: {
+                id: Number(currentUser.id),
+            }
+        })
+
+        if (!User) {
+            throw new Error("Пользователь не найден, перезайдите в аккаунт!")
+        }
+
+
+
+        const findRequest = await prisma.replenish.findFirst({
+            where: {
+                id: id
+            }
+        })
+
+        if (!findRequest) {
+            throw new Error("Заявка не найдена!")
+        }
+
+        await prisma.replenish.update({
+            where: {
+                id: id,
+            },
+            data: {
+                status: REPLENISH_STATUS.REJECTED
+            }
+        })
+
+        await CreateLog(User.userName, `Отклонил задание #${id}`)
+        
+    } catch (error) {
+        console.log('Error [CANCEL_REQUEST]', error)
+        throw error;
+    }
+}
+
+export async function SuccessRequest(id: number) {
+    try {
+
+        const currentUser = await getUserSession()
+        
+        if (!currentUser) {
+            throw new Error("Пользователь не найден, перезайдите в аккаунт!")
+        }
+
+        const User = await prisma.user.findFirst({
+            where: {
+                id: Number(currentUser.id),
+            }
+        })
+
+        if (!User) {
+            throw new Error("Пользователь не найден, перезайдите в аккаунт!")
+        }
+
+
+
+        const findRequest = await prisma.replenish.findFirst({
+            where: {
+                id: id
+            }
+        })
+
+        if (!findRequest) {
+            throw new Error("Заявка не найдена!")
+        }
+
+        await prisma.replenish.update({
+            where: {
+                id: id,
+            },
+            data: {
+                status: REPLENISH_STATUS.SUCCESS
+            }
+        })
+
+        const RequestUser = await prisma.user.findFirst({
+            where: {
+                userName: findRequest.recipient
+            }
+        })
+
+        if (!RequestUser) {
+            throw new Error("Пользователь не найден!")
+        }
+
+
+        const RequestUserCard = await prisma.card.findFirst({
+            where: {
+                ownerId: Number(RequestUser.id)
+            }
+        });
+
+        if (!RequestUserCard) {
+            throw new Error("Карта не найдена!");
+        }
+
+        if (findRequest.operationType == OPERATION_TYPE.REPLENISHMENT) {
+            await prisma.card.update({
+                where: {
+                    id: RequestUserCard.id
+                },
+                data: {
+                    balance: {
+                        increment: findRequest.amount 
+                    }
+                }
+            });
+
+            await prisma.transactions.create({
+                data: {
+                    sender: "bank",
+                    recipient: RequestUser.userName,
+                    amount: findRequest.amount,
+                    commission: 0,
+                    message: `Пополнение от BANK в ${new Date().toLocaleString()}`,
+                    transactionSenderId: 6,
+                    transactionRecipientId: RequestUser.id,
+                }
+            })
+
+
+
+        } else if (findRequest.operationType == OPERATION_TYPE.WITHDRAWAL) {
+            await prisma.card.update({
+                where: {
+                    id: RequestUserCard.id
+                },
+                data: {
+                    balance: {
+                        decrement: findRequest.amount 
+                    }
+                }
+            });
+
+            await prisma.transactions.create({
+                data: {
+                    sender: "bank",
+                    recipient: RequestUser.userName,
+                    amount: findRequest.amount,
+                    commission: 0,
+                    message: `Снятие для ${RequestUser.userName} в ${new Date().toLocaleString()}`,
+                    transactionSenderId: 6,
+                    transactionRecipientId: RequestUser.id,
+                }
+            })
+        }
+
+        const courier = await prisma.courier.findFirst({
+            where: {
+                courierName: User.userName
+            }
+        });
+
+        if (!courier) {
+            throw new Error("Курьер не найден!");
+        }
+
+        await prisma.courier.update({
+            where: {
+                id: courier.id
+            },
+            data: {
+                score: {
+                    increment: 1
+                }
+            }
+        });
+
+        await CreateLog(User.userName, `Выполнил задание #${id}`)
+
+        
+    } catch (error) {
+        console.log('Error [SUCCESS_REQUEST]', error)
         throw error;
     }
 }

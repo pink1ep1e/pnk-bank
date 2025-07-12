@@ -379,3 +379,37 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+@keyframes slideDown {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes dotAnimation {
+  0%, 100% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+}
+
+.loading-dots::after {
+  content: ".";
+  animation: dotAnimation 1.5s infinite;
+}
+

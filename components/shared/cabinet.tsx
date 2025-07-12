@@ -35,7 +35,7 @@ export const Cabinet: React.FC<Props> = ({transaction, data, card, notifications
                     <div data-aos="fade-up">
                         <CardDetails data={data} card={card}/>
                     </div>
-                    <CardButtons />
+                    <CardButtons /> 
                     <div data-aos="fade-left">
                         <AccountDetails data={data} admin={admin}/>
                     </div>
