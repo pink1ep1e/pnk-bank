@@ -955,8 +955,8 @@ export async function SuccessRequest(id: number) {
                     amount: findRequest.amount,
                     commission: 0,
                     message: `Снятие для ${RequestUser.userName} в ${new Date().toLocaleString()}`,
-                    transactionSenderId: 6,
-                    transactionRecipientId: RequestUser.id,
+                    transactionSenderId: RequestUser.id,
+                    transactionRecipientId: 6,
                 }
             })
         }
