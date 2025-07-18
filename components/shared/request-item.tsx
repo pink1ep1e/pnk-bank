@@ -219,7 +219,7 @@ export const RequestItem: React.FC<Props> = ({
                     <div className="flex flex-col gap-2 w-full">
                         <p className="text-[18px] text-gray-600">Комментарий:</p>
                         <div className="bg-primary/10 text-primary px-4 py-2 text-[18px] rounded-lg">
-                            { comment == "" ? "Комментарий не был оставлен" : comment}
+                            {!comment ? "Комментарий не был оставлен" : comment}
                         </div>
                     </div>
                 </div>
