@@ -20,7 +20,7 @@ export default async function AccountDashboard() {
     return redirect('/login');
   }
 
-  if (user.role === 'USER') {
+  if (user.role === 'USER' || 'MODER') {
     return redirect('/cabinet');
   }
 
