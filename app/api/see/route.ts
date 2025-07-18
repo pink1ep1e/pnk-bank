@@ -25,6 +25,20 @@ export async function GET() {
             status: {
                 in: ['PENDING', 'WAITING']
             }
+        },
+        select: {
+            id: true,
+            recipient: true,
+            courier: true,
+            operationType: true,
+            operationMethod: true,
+            coordinates: true,
+            amount: true,
+            сomment: true, // Используем правильное название поля
+            waitingTime: true,
+            createdAt: true,
+            runTime: true,
+            status: true,
         }
     });
 

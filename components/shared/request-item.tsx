@@ -16,7 +16,7 @@ interface Props {
     operationMethod: OPERATION_METHOD;
     coordinates: string;
     amount: number;
-    comment?: string;
+    сomment?: string;
     waitingTime?: Date;
     runTime?: number;
     createdAt: Date;
@@ -32,7 +32,7 @@ export const RequestItem: React.FC<Props> = ({
     operationMethod,
     coordinates,
     amount,
-    comment,
+    сomment,
     waitingTime,
     runTime,
     createdAt,
@@ -219,7 +219,7 @@ export const RequestItem: React.FC<Props> = ({
                     <div className="flex flex-col gap-2 w-full">
                         <p className="text-[18px] text-gray-600">Комментарий:</p>
                         <div className="bg-primary/10 text-primary px-4 py-2 text-[18px] rounded-lg">
-                            {!comment ? "Комментарий не был оставлен" : comment}
+                            {!сomment ? "Комментарий не был оставлен" : сomment}
                         </div>
                     </div>
                 </div>

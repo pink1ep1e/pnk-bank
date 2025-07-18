@@ -24,7 +24,7 @@ interface ReplenishRequest {
     operationMethod: OPERATION_METHOD; // Используем тип OPERATION_METHOD
     coordinates: string;
     amount: number;
-    comment?: string;
+    сomment?: string;
     waitingTime?: Date;
     createdAt: Date;
     runTime?: number;
@@ -108,24 +108,21 @@ export const Banker: React.FC<Props> = ({ logs, user, banker, statistic }) => {
                             </p>
                             <div className="flex flex-col justify-start items-start gap-8 mt-4">
                                 {filteredRequests.map((request: ReplenishRequest) => (
-                                    <div key={request.id}>
-                                        {request.comment}
-                                        <RequestItem 
-                                            // key={request.id}
-                                            id={request.id} 
-                                            recipient={request.recipient} 
-                                            courier={request.courier} 
-                                            operationType={request.operationType} 
-                                            operationMethod={request.operationMethod} 
-                                            coordinates={request.coordinates}
-                                            amount={request.amount}
-                                            comment={request.comment}
-                                            waitingTime={request.waitingTime}
-                                            createdAt={request.createdAt}
-                                            runTime={request.runTime}
-                                            status={request.status}
-                                        />
-                                    </div>
+                                    <RequestItem 
+                                        key={request.id}
+                                        id={request.id} 
+                                        recipient={request.recipient} 
+                                        courier={request.courier} 
+                                        operationType={request.operationType} 
+                                        operationMethod={request.operationMethod} 
+                                        coordinates={request.coordinates}
+                                        amount={request.amount}
+                                        сomment={request.сomment}
+                                        waitingTime={request.waitingTime}
+                                        createdAt={request.createdAt}
+                                        runTime={request.runTime}
+                                        status={request.status}
+                                    />
                                 ))}
                             </div>
                         </div>

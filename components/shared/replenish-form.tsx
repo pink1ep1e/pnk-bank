@@ -19,13 +19,13 @@ export const ReplenishForm: React.FC<Props> = ({ className }) => {
     const [method, setMethod] = useState<string | null>(null);
     const [coordinates, setCoordinates] = useState("");
     const [amount, setAmount] = useState("");
-    const [comment, setComment] = useState("");
+    const [сomment, setComment] = useState("");
 
     const isFormValid = action && method && coordinates.trim() && amount.trim();
 
     const handleSubmit = () => {
         setIsLoading(true);
-        createNewReplenish(action, method, coordinates, Number(amount), comment).then(() => {
+        createNewReplenish(action, method, coordinates, Number(amount), сomment).then(() => {
             setIsLoading(false);
             setIsSubmitted(true);
         }).catch((error) => {
@@ -94,7 +94,7 @@ export const ReplenishForm: React.FC<Props> = ({ className }) => {
                                     type="text" 
                                     className="w-full h-[50px] text-[15px] px-5"
                                     placeholder="Введите комментарий" 
-                                    value={comment}
+                                    value={сomment}
                                     onChange={(e) => setComment(e.target.value)}
                                 />
                             </div>

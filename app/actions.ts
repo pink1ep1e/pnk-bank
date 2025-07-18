@@ -335,7 +335,7 @@ export async function createNewReplenish(
     method: string | null,
     coordinates: string,
     amount: number,
-    comment: string
+    сomment: string
 ) {
     try {
 
@@ -380,7 +380,7 @@ export async function createNewReplenish(
                 operationMethod: operMethod,
                 coordinates: coordinates,
                 amount: amount,
-                сomment: comment,
+                сomment: сomment,
             }
         })
         
