@@ -197,9 +197,9 @@ export const Replenish: React.FC<Props> = ({ className, couriers }) => {
                             укажите сумму операции. Все курьеры проходят строгую проверку и 
                             обеспечивают безопасность ваших средств.
                         </p>
-                        <div className="flex justify-start items-center gap-12 mt-4">
+                        <div className="flex flex-wrap gap-4 mt-4"> {/* Добавляем flex-wrap */}
                             {couriers.map((courier) => (
-                                <div key={courier.id} className="flex rounded-[20px] gap-4">
+                                <div key={courier.id} className="flex rounded-[20px] gap-4" style={{ flex: '1 1 20%' }}> {/* Ограничиваем ширину каждого элемента */}
                                     <Image
                                         src={`https://minotar.net/avatar/${courier.courierName}`}
                                         alt="AVATAR ICON"
