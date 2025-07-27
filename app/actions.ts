@@ -99,6 +99,10 @@ export async function createTransaction({ recipientName, amount, message }: { re
             }
         }
 
+        if (amount < 2) {
+            throw new Error("Минимальная сумма перевода - 2 ALM")
+        }
+
         await prisma.card.update({
             where: {
                 id: cardSender.id,
