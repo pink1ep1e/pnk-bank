@@ -35,7 +35,7 @@ export default async function LoginPage({
 
   const user = await prisma.user.findFirst({
     where: {
-      id: parseInt(session?.id),
+      id: Number(session?.id), // Уберите parseInt, если id - строка
     }
   });
 
